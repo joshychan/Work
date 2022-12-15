@@ -1,0 +1,371 @@
+version 16.9
+service timestamps debug datetime msec
+service timestamps log datetime msec
+platform qfp utilization monitor load 80
+no platform punt-keepalive disable-kernel-core
+platform console virtual
+!
+hostname CSR1kv
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+!
+!
+!         
+!         
+!         
+!         
+ip domain name example.netacad.com
+!         
+!         
+!         
+login on-success log
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+subscriber templating
+!         
+!         
+!         
+!         
+!         
+multilink bundle-name authenticated
+!         
+!         
+!         
+!         
+!         
+crypto pki trustpoint TP-self-signed-384216077
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-384216077
+ revocation-check none
+ rsakeypair TP-self-signed-384216077
+!         
+!         
+crypto pki certificate chain TP-self-signed-384216077
+ certificate self-signed 01
+  3082032E 30820216 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  30312E30 2C060355 04031325 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 33383432 31363037 37301E17 0D323130 31323931 32353933 
+  355A170D 33303031 30313030 30303030 5A303031 2E302C06 03550403 1325494F 
+  532D5365 6C662D53 69676E65 642D4365 72746966 69636174 652D3338 34323136 
+  30373730 82012230 0D06092A 864886F7 0D010101 05000382 010F0030 82010A02 
+  82010100 A571D8DD 1288906C 10019936 7CBAA68A 66AE61F9 124CC718 AE484144 
+  E2AFB12A AA07458F D71BBD65 F828C557 FCB3ADF7 CCA3A16D BD4CE868 EAC79435 
+  A768D391 EC6D373D 04B803B3 00C37084 6B267F38 6BE06C22 0FB0E259 05EB3D38 
+  A26303D7 B61BD184 487F6951 799536DD 4B708404 7767643B A7F89070 E453E297 
+  C4A505A2 99221DCC E28CA9FE EB166AAC 842A9C49 B293492D 1A2D1EBF BA0ECE0F 
+  6F00A843 A97BE429 85C4243A E9519C06 A1F8A029 74E93D9C FDF239CB D1DDFD17 
+  D6A18452 B17D6090 EE454CF2 DBD12D62 75285B8C 877C9FF2 E6537EEF 600DBFE9 
+  59FB1435 6B924721 50CB15E5 01103129 0138942E 50A820A9 A0FF5D5F AD8907C1 
+  8E5C702B 02030100 01A35330 51300F06 03551D13 0101FF04 05300301 01FF301F 
+  0603551D 23041830 16801413 C2291145 5AEA448A 76F04ACC 74A0EACE B1DAF330 
+  1D060355 1D0E0416 041413C2 2911455A EA448A76 F04ACC74 A0EACEB1 DAF3300D 
+  06092A86 4886F70D 01010505 00038201 01004965 F3689D09 C602E4CA 8D86120D 
+  6A3B15D2 FE3CFAD9 5EF58FAA EBA2D793 183501BA 0B6965DC 20FAFBD6 BDE60DFD 
+  2F259CEC 0EFF5F87 EB25508A ABB9E0CE 51278687 13D868C9 535CACCF 87A5D2A0 
+  A6001A79 33CD01B2 B6406E5D 9823F39F 4903E42E 7A49D0FD 13FA27C9 E9EE9357 
+  94886B93 903FDD31 D73A6312 2DE41D46 767694D9 EA37BF95 1E65CD02 853FD00B 
+  00E91E16 EFDD0339 C12968B3 5980DA6D 002F4247 A2CC88C1 E7EEC8A4 994992C5 
+  EB9AC775 F923FE5F F3323118 41D7F775 D5380DD9 E6895CC4 6D4F3268 87F896DD 
+  0C00F2C7 E3F52B44 A0292FB7 0BE5F00E 061347F9 0B17C2D9 DBEB5D7C C77FF3D2 
+  F7698FD4 939C781B A7772A99 AB6DFABC 3454
+        quit
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+license udi pid CSR1000V sn 9C38DGUMB04
+no license smart enable
+diagnostic bootup level minimal
+!         
+spanning-tree extend system-id
+!         
+netconf-yang
+!         
+restconf  
+!         
+username cisco privilege 15 secret 5 $1$S2XU$IsZBWUig5GV9LM8YNvUaj.
+!         
+redundancy
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+interface GigabitEthernet1
+ description INSIDE
+ ip address 192.168.56.101 255.255.255.0
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!         
+interface GigabitEthernet2
+ no ip address
+ shutdown 
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!         
+ip forward-protocol nd
+no ip http server
+ip http authentication local
+ip http secure-server
+!         
+!         
+!         
+!         
+!         
+!         
+control-plane
+!         
+!         
+!         
+!         
+!         
+banner motd ^C
+*                                           *
+**                                         **
+***                                       ***
+***  Cisco Networking Academy             ***
+***                                       ***
+***  This software is provided for        ***
+***   Educational Purposes                ***
+***    Only in Networking Academies       ***
+***                                       ***
+**                                         **
+*                                           *
+^C        
+!         
+line con 0
+ logging synchronous
+ stopbits 1
+line vty 0 4
+ logging synchronous
+ login local
+ transport input all
+line vty 5 15
+ logging synchronous
+ login local
+ transport input all
+!         
+!         
+!         
+!         
+!         
+!         
+end       
+          
+CSR1kv#
+CSR1kv#
+CSR1kv#
+CSR1kv#
+CSR1kv#
+CSR1kv#
+CSR1kv#
+CSR1kv#
+CSR1kv#
+CSR1kv#
+CSR1kv#
+CSR1kv#
+CSR1kv#
+CSR1kv#
+CSR1kv#
+CSR1kv#show star
+CSR1kv#show startup-config 
+Using 2204 out of 33554432 bytes
+!
+! Last configuration change at 07:35:16 UTC Fri May 27 2022
+!
+version 16.9
+service timestamps debug datetime msec
+service timestamps log datetime msec
+platform qfp utilization monitor load 80
+no platform punt-keepalive disable-kernel-core
+platform console virtual
+!
+hostname CSR1kv
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!         
+!         
+!         
+ip domain name example.netacad.com
+!         
+!         
+!         
+login on-success log
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+subscriber templating
+!         
+!         
+!         
+!         
+!         
+multilink bundle-name authenticated
+!         
+!         
+!         
+!         
+!         
+crypto pki trustpoint TP-self-signed-384216077
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-384216077
+ revocation-check none
+ rsakeypair TP-self-signed-384216077
+!         
+!         
+crypto pki certificate chain TP-self-signed-384216077
+ certificate self-signed 01 nvram:IOS-Self-Sig#1.cer
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+license udi pid CSR1000V sn 9C38DGUMB04
+no license smart enable
+diagnostic bootup level minimal
+!         
+spanning-tree extend system-id
+!         
+netconf-yang
+!         
+restconf  
+!         
+username cisco privilege 15 secret 5 $1$S2XU$IsZBWUig5GV9LM8YNvUaj.
+!         
+redundancy
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+interface GigabitEthernet1
+ description INSIDE
+ ip address 192.168.56.101 255.255.255.0
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!         
+interface GigabitEthernet2
+ no ip address
+ shutdown 
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!         
+ip forward-protocol nd
+no ip http server
+ip http authentication local
+ip http secure-server
+!         
+!         
+!         
+!         
+!         
+!         
+control-plane
+!         
+!         
+!         
+!         
+!         
+banner motd ^C
+*                                           *
+**                                         **
+***                                       ***
+***  Cisco Networking Academy             ***
+***                                       ***
+***  This software is provided for        ***
+***   Educational Purposes                ***
+***    Only in Networking Academies       ***
+***                                       ***
+**                                         **
+*                                           *
+^C        
+!         
+line con 0
+ logging synchronous
+ stopbits 1
+line vty 0 4
+ logging synchronous
+ login local
+ transport input ssh
+line vty 5 15
+ logging synchronous
+ login local
+ transport input ssh
+!         
+!         
+!         
+!         
+!         
+!         
+end      
